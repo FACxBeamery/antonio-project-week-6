@@ -1,6 +1,7 @@
 import React from "react";
 import Style from "./board.css.js";
 import Grid from "./board/grid";
+import pDataStructure from "../utils/playerData";
 import { getNasaAPOD, urltoBGStyle } from "../utils/getNasaPic.js";
 import PlayerInfo from "./board/players";
 
@@ -8,12 +9,6 @@ const Board = ({ apod, setApod }) => {
 	const [rows] = React.useState(6);
 	const [columns] = React.useState(7);
 	const [board, setBoard] = React.useState();
-
-	function pDataStructure(id) {
-		this.id = id;
-		this.githubUser = "";
-		this.score = 0;
-	}
 
 	const [playerIds] = React.useState([1, 2]);
 	const [players, setPlayers] = React.useState();
@@ -24,8 +19,8 @@ const Board = ({ apod, setApod }) => {
 		});
 
 		let tempPlayers = {};
-		playerIds.map((id) => {
-			tempPlayers[`p${id}`] = new pDataStructure(id);
+		playerIds.map((pId) => {
+			tempPlayers[`p${pId}`] = new pDataStructure(pId);
 		});
 		setPlayers(tempPlayers);
 	}, []);
@@ -38,12 +33,12 @@ const Board = ({ apod, setApod }) => {
 	) : (
 		<div style={boardApodStyle}>
 			<div style={infoStyle}>
-				{playerIds.map((id, i) => {
+				{playerIds.map((pId, i) => {
 					return (
 						<PlayerInfo
 							key={i}
 							index={i}
-							id={id}
+							pId={pId}
 							players={players}
 							setPlayers={setPlayers}
 						/>

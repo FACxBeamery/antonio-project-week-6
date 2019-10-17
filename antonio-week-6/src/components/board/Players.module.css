@@ -1,0 +1,81 @@
+.playerForm {
+	display: flex;
+	flex: 1;
+	margin: 1rem;
+	background-color: white;
+	border-radius: 5px;
+}
+
+.heading {
+	display: flex;
+}
+
+.heading > h3 {
+	flex-grow: 1;
+}
+
+.ppArea {
+	flex: 1;
+}
+
+.ppArea > img {
+	max-width: 100%;
+	max-height: 100%;
+	border-radius: 5px;
+}
+
+.formArea {
+	flex: 2;
+}
+
+.fieldset {
+	border-width: 0;
+}
+
+.button {
+	border-width: 0;
+	border-radius: 5px;
+	transition: 0.25s;
+	cursor: default;
+}
+
+.button_reset {
+	color: white;
+	cursor: pointer;
+}
+
+.button_reset:hover .highlightOff {
+	color: black;
+}
+
+.progressWrapper {
+	display: none;
+}
+
+.progress {
+	margin: 2px;
+}
+
+.playerStatusIcons {
+	transition: 0.25s;
+	padding: 10px;
+	display: inline;
+	color: white;
+	margin-bottom: auto;
+}
+
+.check {
+	background-color: green;
+}
+
+.wait {
+	background-color: lightgray;
+}
+
+.notFound {
+	background-color: red;
+}
+
+.highlightOff {
+	color: lightgray;
+}
