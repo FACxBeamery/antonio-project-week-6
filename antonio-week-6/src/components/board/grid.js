@@ -1,6 +1,6 @@
 import React from "react";
-import Style from "./board-grid.css";
-import Row from "./board-row.js";
+import Style from "./grid.css";
+import Row from "./row.js";
 
 const zeros = (dimensions) => {
 	var array = [];
@@ -17,12 +17,12 @@ const Grid = ({ rows, columns, board, setBoard }) => {
 		setBoard(zeros([rows, columns]));
 	}, []);
 
-	const { table } = Style;
+	const { table, flex4 } = Style;
 
-	if (!board) return <p>loading...</p>;
-
-	return (
-		<div style={{ flex: 4 }}>
+	return !board ? (
+		<p>loading...</p>
+	) : (
+		<div style={flex4}>
 			<table style={table}>
 				<thead></thead>
 				<tbody>

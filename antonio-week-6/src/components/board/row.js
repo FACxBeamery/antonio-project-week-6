@@ -1,6 +1,6 @@
 import React from "react";
-import Style from "./board-grid.css";
-import Disc from "./disc.js";
+import Style from "./grid.css";
+import Disc from "../disc.js";
 
 const Row = ({ cells }) => {
 	const { cellStyle } = Style;
