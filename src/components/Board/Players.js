@@ -176,12 +176,15 @@ const PlayerInfo = ({ pId, index, players, setPlayers }) => {
 		></img>
 	);
 
+	const pDataConfirmedIsFalse = playerData.confirmed === false;
+	const pDataConfirmedIsUndefined = playerData.confirmed === undefined;
+
 	return (
 		<div className={Style.playerForm}>
 			<div className={Style.ppArea}>
 				{playerData.avatar_url
 					? profilePic
-					: playerData.confirmed === false
+					: pDataConfirmedIsFalse
 					? errorMsg
 					: waitMsg}
 			</div>
@@ -190,7 +193,7 @@ const PlayerInfo = ({ pId, index, players, setPlayers }) => {
 					<h3>Player {pId}</h3>
 					{playerData.confirmed
 						? playerCheck
-						: playerData.confirmed === undefined
+						: pDataConfirmedIsUndefined
 						? playerWait
 						: playerNotFound}
 				</div>
