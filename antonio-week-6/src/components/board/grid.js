@@ -15,7 +15,7 @@ const zeros = (dimensions) => {
 const Grid = ({ rows, columns, board, setBoard }) => {
 	React.useEffect(() => {
 		setBoard(zeros([rows, columns]));
-	}, []);
+	}, [columns, rows, setBoard]);
 
 	const { table, flex4 } = Style;
 

@@ -1,9 +1,9 @@
 import React from "react";
 import Style from "./Board.style";
-import Grid from "./board/Grid";
+import Grid from "./Board/Grid";
 import pDataStructure from "../utils/playerData";
 import { getNasaAPOD, urltoBGStyle } from "../utils/getNasaPic.js";
-import PlayerInfo from "./board/Players";
+import PlayerInfo from "./Board/Players";
 
 const Board = ({ apod, setApod }) => {
 	const [rows] = React.useState(6);
@@ -19,11 +19,11 @@ const Board = ({ apod, setApod }) => {
 		});
 
 		let tempPlayers = {};
-		playerIds.map((pId) => {
-			tempPlayers[`p${pId}`] = new pDataStructure(pId);
-		});
+		playerIds.map(
+			(pId) => (tempPlayers[`p${pId}`] = new pDataStructure(pId))
+		);
 		setPlayers(tempPlayers);
-	}, []);
+	}, [playerIds, setApod]);
 
 	const { infoStyle, boardStyle } = Style;
 	let boardApodStyle = { ...boardStyle, ...apod };
