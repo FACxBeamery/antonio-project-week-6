@@ -2,11 +2,13 @@ import React from "react";
 import Style from "./Grid.style";
 import Row from "./Row.js";
 
-const zeros = (dimensions) => {
+const create2dZeros = (dimensions) => {
+	const onlyOne = dimensions.length === 1;
+
 	var array = [];
 
 	for (var i = 0; i < dimensions[0]; ++i) {
-		array.push(dimensions.length === 1 ? 0 : zeros(dimensions.slice(1)));
+		array.push(onlyOne ? 0 : create2dZeros(dimensions.slice(1)));
 	}
 
 	return array;
@@ -14,7 +16,7 @@ const zeros = (dimensions) => {
 
 const Grid = ({ rows, columns, board, setBoard }) => {
 	React.useEffect(() => {
-		setBoard(zeros([rows, columns]));
+		setBoard(create2dZeros([rows, columns]));
 	}, [columns, rows, setBoard]);
 
 	const { table, flex4 } = Style;

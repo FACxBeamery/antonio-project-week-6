@@ -5,17 +5,15 @@ import Disc from "../Disc.js";
 const Row = ({ cells }) => {
 	const { cellStyle } = Style;
 
-	return (
-		<tr>
-			{cells.map((cell, i) => (
-				<td key={i}>
-					<div style={cellStyle}>
-						<Disc value={cell} />
-					</div>
-				</td>
-			))}
-		</tr>
-	);
+	const mapCellsToTD = cells.map((cell, i) => (
+		<td key={i}>
+			<div style={cellStyle}>
+				<Disc value={cell} />
+			</div>
+		</td>
+	));
+
+	return <tr>{mapCellsToTD}</tr>;
 };
 
 export default Row;

@@ -28,23 +28,19 @@ const Board = ({ apod, setApod }) => {
 	const { infoStyle, boardStyle } = Style;
 	let boardApodStyle = { ...boardStyle, ...apod };
 
-	return !apod || !players ? (
-		<h3>...Loading</h3>
-	) : (
+	const mapIdsToPlayerPanel = playerIds.map((pId, i) => (
+		<PlayerInfo
+			key={i}
+			index={i}
+			pId={pId}
+			players={players}
+			setPlayers={setPlayers}
+		/>
+	));
+
+	const boardComponents = (
 		<div style={boardApodStyle}>
-			<div style={infoStyle}>
-				{playerIds.map((pId, i) => {
-					return (
-						<PlayerInfo
-							key={i}
-							index={i}
-							pId={pId}
-							players={players}
-							setPlayers={setPlayers}
-						/>
-					);
-				})}
-			</div>
+			<div style={infoStyle}>{mapIdsToPlayerPanel}</div>
 			<Grid
 				rows={rows}
 				columns={columns}
@@ -53,6 +49,8 @@ const Board = ({ apod, setApod }) => {
 			/>
 		</div>
 	);
+
+	return !apod || !players ? <h3>...Loading</h3> : boardComponents;
 };
 
 export default Board;
