@@ -1,9 +1,9 @@
 import React from "react";
-import Style from "./board.css.js";
-import Grid from "./board/grid";
+import Style from "./Board.style";
+import Grid from "./board/Grid";
 import pDataStructure from "../utils/playerData";
 import { getNasaAPOD, urltoBGStyle } from "../utils/getNasaPic.js";
-import PlayerInfo from "./board/players";
+import PlayerInfo from "./board/Players";
 
 const Board = ({ apod, setApod }) => {
 	const [rows] = React.useState(6);

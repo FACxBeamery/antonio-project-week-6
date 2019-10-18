@@ -1,6 +1,6 @@
 import React from "react";
-import Style from "./grid.css";
-import Row from "./row.js";
+import Style from "./Grid.style";
+import Row from "./Row.js";
 
 const zeros = (dimensions) => {
 	var array = [];

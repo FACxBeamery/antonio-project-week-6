@@ -19,12 +19,9 @@ const PlayerInfo = ({ pId, index, players, setPlayers }) => {
 	let progress = document.getElementById(`${p}_progress`);
 
 	if (button) {
-		console.log(playerData.githubUser);
 		playerData.githubUser === ""
 			? (button.disabled = true)
 			: (button.disabled = false);
-
-		console.log(button.disabled);
 
 		button.disabled
 			? (button.style.cursor = "default")
@@ -111,8 +108,6 @@ const PlayerInfo = ({ pId, index, players, setPlayers }) => {
 		userInput.disabled = false;
 		button.disabled = false;
 	};
-
-	console.log(playerData);
 
 	const searchBtn = (
 		<>

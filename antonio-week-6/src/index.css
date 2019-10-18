@@ -16,27 +16,3 @@ table {
 	margin: 0 auto;
 	border-spacing: 1rem;
 }
-
-.white-disc {
-	height: 90%;
-	width: 90%;
-	background-color: #fff;
-	border-radius: 50%;
-	transition: background-color 0.5s;
-}
-
-.red-disc {
-	height: 90%;
-	width: 90%;
-	background-color: red;
-	border-radius: 50%;
-	transition: background-color 0.5s;
-}
-
-.yellow-disc {
-	height: 90%;
-	width: 90%;
-	background-color: yellow;
-	border-radius: 50%;
-	transition: background-color 0.5s;
-}

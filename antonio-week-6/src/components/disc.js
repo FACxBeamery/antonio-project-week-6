@@ -1,13 +1,15 @@
 import React from "react";
+import Style from "./Disc.style";
 
 const Disc = ({ value }) => {
+	const { whiteDisc, redDisc, yellowDisc } = { ...Style };
 	const valueToColour = {
-		0: "white-disc",
-		1: "red-disc",
-		2: "yellow-disc"
+		0: whiteDisc,
+		1: redDisc,
+		2: yellowDisc
 	};
 
-	return <div className={valueToColour[value]}></div>;
+	return <div style={valueToColour[value]}></div>;
 };
 
 export default Disc;
