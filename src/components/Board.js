@@ -5,12 +5,13 @@ import pDataStructure from "../utils/playerData";
 import { getNasaAPOD, urltoBGStyle } from "../utils/getNasaPic.js";
 import PlayerInfo from "./Board/Players";
 
+const playerIds = [1, 2];
+
 const Board = ({ apod, setApod }) => {
 	const [rows] = React.useState(6);
 	const [columns] = React.useState(7);
 	const [board, setBoard] = React.useState();
 
-	const [playerIds] = React.useState([1, 2]);
 	const [players, setPlayers] = React.useState();
 
 	React.useEffect(() => {
@@ -23,7 +24,7 @@ const Board = ({ apod, setApod }) => {
 			(pId) => (tempPlayers[`p${pId}`] = new pDataStructure(pId))
 		);
 		setPlayers(tempPlayers);
-	}, [playerIds, setApod]);
+	}, [setApod]);
 
 	const { infoStyle, boardStyle } = Style;
 	let boardApodStyle = { ...boardStyle, ...apod };
