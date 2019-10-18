@@ -121,9 +121,9 @@ const PlayerInfo = ({ pId, index, players, setPlayers }) => {
 				<SearchIcon />
 			</button>
 
-			<a id={`${p}_progress`} className={Style.progressWrapper}>
+			<span id={`${p}_progress`} className={Style.progressWrapper}>
 				<CircularProgress className={Style.progress} />
-			</a>
+			</span>
 		</>
 	);
 
@@ -134,26 +134,26 @@ const PlayerInfo = ({ pId, index, players, setPlayers }) => {
 			type="click"
 			onClick={handleClear}
 		>
-			<a className={Style.highlightOff}>
+			<span className={Style.highlightOff}>
 				<HighlightOffIcon />
-			</a>
+			</span>
 		</button>
 	);
 
 	const playerCheck = (
-		<a className={`${Style.playerStatusIcons} ${Style.check}`}>
+		<span className={`${Style.playerStatusIcons} ${Style.check}`}>
 			<CheckIcon />
-		</a>
+		</span>
 	);
 	const playerWait = (
-		<a className={`${Style.playerStatusIcons} ${Style.wait}`}>
+		<span className={`${Style.playerStatusIcons} ${Style.wait}`}>
 			<RemoveIcon />
-		</a>
+		</span>
 	);
 	const playerNotFound = (
-		<a className={`${Style.playerStatusIcons} ${Style.notFound}`}>
+		<span className={`${Style.playerStatusIcons} ${Style.notFound}`}>
 			<ClearIcon />
-		</a>
+		</span>
 	);
 
 	const waitMsg = <h3>Waiting for player...</h3>;
@@ -169,7 +169,12 @@ const PlayerInfo = ({ pId, index, players, setPlayers }) => {
 		</>
 	);
 
-	const profilePic = <img src={playerData.avatar_url}></img>;
+	const profilePic = (
+		<img
+			alt={`Player ${pId}'s GitHub profile`}
+			src={playerData.avatar_url}
+		></img>
+	);
 
 	return (
 		<div className={Style.playerForm}>
