@@ -10,7 +10,7 @@ import Style from "./Players.module.css";
 import pDataStructure from "../../utils/playerData";
 import { getGithubData } from "../../utils/getGithubData.js";
 
-const PlayerInfo = ({ pId, index, players, setPlayers }) => {
+const PlayerInfo = ({ pId, index, players, setPlayers, myTurn }) => {
 	const p = `p${pId}`;
 	const playerData = players[p];
 
@@ -180,7 +180,15 @@ const PlayerInfo = ({ pId, index, players, setPlayers }) => {
 	const pDataConfirmedIsUndefined = playerData.confirmed === undefined;
 
 	return (
-		<div className={Style.playerForm}>
+		<div
+			className={`${Style.playerForm} ${
+				myTurn !== undefined
+					? myTurn
+						? Style.myTurn
+						: Style.notMyTurn
+					: ""
+			}`}
+		>
 			<div className={Style.ppArea}>
 				{playerData.avatar_url
 					? profilePic

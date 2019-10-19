@@ -3,6 +3,10 @@ const style = {
 		display: "flex",
 		flex: 1
 	},
+
+	flex5: {
+		flex: 5
+	},
 	boardStyle: {
 		display: "flex",
 		flexDirection: "column",

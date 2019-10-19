@@ -14,26 +14,38 @@ const create2dZeros = (dimensions) => {
 	return array;
 };
 
-const Grid = ({ rows, columns, board, setBoard }) => {
+const Grid = ({
+	rows,
+	columns,
+	board,
+	setBoard,
+	playersTurn,
+	setPlayersTurn
+}) => {
 	React.useEffect(() => {
 		setBoard(create2dZeros([rows, columns]));
 	}, [columns, rows, setBoard]);
 
-	const { table, flex4 } = Style;
+	const { table } = Style;
 
 	return !board ? (
 		<p>loading...</p>
 	) : (
-		<div style={flex4}>
-			<table style={table}>
-				<thead></thead>
-				<tbody>
-					{board.map((row, i) => (
-						<Row key={i} cells={row} />
-					))}
-				</tbody>
-			</table>
-		</div>
+		<table style={table}>
+			<thead></thead>
+			<tbody>
+				{board.map((row, i) => (
+					<Row
+						key={i}
+						cells={row}
+						playersTurn={playersTurn}
+						setPlayersTurn={setPlayersTurn}
+						board={board}
+						setBoard={setBoard}
+					/>
+				))}
+			</tbody>
+		</table>
 	);
 };
 
