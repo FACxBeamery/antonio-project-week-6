@@ -8,7 +8,8 @@ const GridController = ({
 	players,
 	setPlayers,
 	playersTurn,
-	setPlayersTurn
+	setPlayersTurn,
+	setWinnerId
 }) => {
 	const [rows] = React.useState(6);
 	const [columns] = React.useState(7);
@@ -25,7 +26,8 @@ const GridController = ({
 	]);
 
 	React.useEffect(() => {
-		if (startGame && !playersTurn)
+		console.log(startGame);
+		if (startGame && playersTurn < 1)
 			setPlayersTurn(Math.floor(Math.random() * 2) + 1);
 	}, [startGame, playersTurn, setPlayersTurn]);
 
@@ -37,8 +39,10 @@ const GridController = ({
 			columns={columns}
 			board={board}
 			setBoard={setBoard}
+			setStartGame={setStartGame}
 			playersTurn={playersTurn}
 			setPlayersTurn={setPlayersTurn}
+			setWinnerId={setWinnerId}
 		/>
 	);
 

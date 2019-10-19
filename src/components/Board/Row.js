@@ -2,9 +2,17 @@ import React from "react";
 import Style from "./Row.style";
 import Disc from "../Disc.js";
 
-import { toggleTurn } from "../../utils/gameHelpers";
+import { toggleTurn, checkWin } from "../../utils/gameHelpers";
 
-const Row = ({ cells, playersTurn, setPlayersTurn, board, setBoard }) => {
+const Row = ({
+	cells,
+	playersTurn,
+	setPlayersTurn,
+	board,
+	setBoard,
+	setStartGame,
+	setWinnerId
+}) => {
 	const { cellStyle } = Style;
 
 	const placeDisc = (colid) => {
@@ -20,6 +28,7 @@ const Row = ({ cells, playersTurn, setPlayersTurn, board, setBoard }) => {
 			}
 
 			if (row[colid]) return true;
+
 			return false;
 		});
 
@@ -28,16 +37,25 @@ const Row = ({ cells, playersTurn, setPlayersTurn, board, setBoard }) => {
 			tempBoard[lowestRow][colid] = playersTurn;
 
 			setBoard(tempBoard);
-			return true;
-		} else {
-			return false;
+			return [lowestRow, colid];
 		}
+		return false;
 	};
 
 	const handleClick = (colid) => {
-		let isSuccess = placeDisc(colid);
+		if (playersTurn < 1) return;
 
-		if (isSuccess) setPlayersTurn(toggleTurn(playersTurn));
+		let discPos = placeDisc(colid);
+
+		if (discPos) {
+			let isWin = checkWin(board, discPos);
+			if (!isWin) setPlayersTurn(toggleTurn(playersTurn));
+			else {
+				console.log(`Player ${playersTurn} wins!`);
+				setPlayersTurn(-1);
+				setWinnerId(playersTurn);
+			}
+		}
 	};
 
 	const mapCellsToTD = cells.map((cell, i) => (

@@ -8,7 +8,8 @@ const style = {
 		flexDirection: "row",
 		justifyContent: "center",
 		alignItems: "center",
-		cursor: "pointer"
+		cursor: "pointer",
+		border: "4px solid #222"
 	}
 };
 

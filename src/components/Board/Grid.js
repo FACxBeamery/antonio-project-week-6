@@ -19,8 +19,10 @@ const Grid = ({
 	columns,
 	board,
 	setBoard,
+	setStartGame,
 	playersTurn,
-	setPlayersTurn
+	setPlayersTurn,
+	setWinnerId
 }) => {
 	React.useEffect(() => {
 		setBoard(create2dZeros([rows, columns]));
@@ -42,6 +44,8 @@ const Grid = ({
 						setPlayersTurn={setPlayersTurn}
 						board={board}
 						setBoard={setBoard}
+						setStartGame={setStartGame}
+						setWinnerId={setWinnerId}
 					/>
 				))}
 			</tbody>

@@ -12,6 +12,7 @@ const Board = ({ readyToStartGame, setReadyToStartGame, apod, setApod }) => {
 	const [players, setPlayers] = React.useState();
 	const [playersTurn, setPlayersTurn] = React.useState(0);
 	const [startGame, setStartGame] = React.useState(false);
+	const [winnerId, setWinnerId] = React.useState(0);
 
 	React.useEffect(() => {
 		getNasaAPOD().then((data) => {
@@ -49,6 +50,9 @@ const Board = ({ readyToStartGame, setReadyToStartGame, apod, setApod }) => {
 					? true
 					: false
 			}
+			setStartGame={setStartGame}
+			winnerId={winnerId}
+			setWinnerId={setWinnerId}
 		/>
 	));
 
@@ -64,6 +68,7 @@ const Board = ({ readyToStartGame, setReadyToStartGame, apod, setApod }) => {
 					setPlayers={setPlayers}
 					playersTurn={playersTurn}
 					setPlayersTurn={setPlayersTurn}
+					setWinnerId={setWinnerId}
 				/>
 			</div>
 		</div>
