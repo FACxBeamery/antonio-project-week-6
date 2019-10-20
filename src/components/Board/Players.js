@@ -4,13 +4,23 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import ClearIcon from "@material-ui/icons/Clear";
 import SearchIcon from "@material-ui/icons/Search";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import LoopIcon from "@material-ui/icons/Loop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import Style from "./Players.module.css";
 import pDataStructure from "../../utils/playerData";
 import { getGithubData } from "../../utils/getGithubData.js";
 
-const PlayerInfo = ({ pId, index, players, setPlayers }) => {
+const PlayerInfo = ({
+	pId,
+	index,
+	players,
+	setPlayers,
+	myTurn,
+	setStartGame,
+	winnerId,
+	setWinnerId
+}) => {
 	const p = `p${pId}`;
 	const playerData = players[p];
 
@@ -109,6 +119,13 @@ const PlayerInfo = ({ pId, index, players, setPlayers }) => {
 		button.disabled = false;
 	};
 
+	const handleReset = () => {
+		if (winnerId) {
+			setStartGame(false);
+			setWinnerId(0);
+		}
+	};
+
 	const searchBtn = (
 		<>
 			<button
@@ -140,8 +157,26 @@ const PlayerInfo = ({ pId, index, players, setPlayers }) => {
 		</button>
 	);
 
+	const resetBtn = (
+		<button
+			id={`p${pId}_button`}
+			className={`${Style.button} ${Style.button_reset}`}
+			type="click"
+			onClick={handleReset}
+		>
+			<span className={Style.highlightOff}>
+				<LoopIcon />
+			</span>
+		</button>
+	);
+
 	const playerCheck = (
 		<span className={`${Style.playerStatusIcons} ${Style.check}`}>
+			<CheckIcon />
+		</span>
+	);
+	const playerCheckWin = (
+		<span className={`${Style.playerStatusIcons} ${Style.win}`}>
 			<CheckIcon />
 		</span>
 	);
@@ -179,9 +214,28 @@ const PlayerInfo = ({ pId, index, players, setPlayers }) => {
 	const pDataConfirmedIsFalse = playerData.confirmed === false;
 	const pDataConfirmedIsUndefined = playerData.confirmed === undefined;
 
+	const winPlayerFormStyle = winnerId
+		? winnerId === pId
+			? Style.playerFormWinner
+			: Style.playerFormLoser
+		: "";
+
 	return (
-		<div className={Style.playerForm}>
-			<div className={Style.ppArea}>
+		<div
+			className={`${Style.playerForm} ${
+				myTurn !== undefined && !winnerId
+					? myTurn
+						? Style.myTurn
+						: Style.notMyTurn
+					: ""
+			}
+			${winPlayerFormStyle} 
+			`}
+		>
+			<div
+				className={`${Style.ppArea} 
+				${myTurn === false && !winnerId ? Style.lowOpacity : ""}`}
+			>
 				{playerData.avatar_url
 					? profilePic
 					: pDataConfirmedIsFalse
@@ -191,10 +245,12 @@ const PlayerInfo = ({ pId, index, players, setPlayers }) => {
 			<div className={Style.formArea}>
 				<div className={Style.heading}>
 					<h3>Player {pId}</h3>
-					{playerData.confirmed
+					{playerData.confirmed && !winnerId
 						? playerCheck
 						: pDataConfirmedIsUndefined
 						? playerWait
+						: winnerId
+						? playerCheckWin
 						: playerNotFound}
 				</div>
 				<form onSubmit={(e) => e.preventDefault()}>
@@ -209,7 +265,11 @@ const PlayerInfo = ({ pId, index, players, setPlayers }) => {
 							onChange={handleChange}
 							placeholder="Enter GitHub Username"
 						/>
-						{playerData.confirmed ? clearBtn : searchBtn}
+						{!winnerId
+							? playerData.confirmed
+								? clearBtn
+								: searchBtn
+							: resetBtn}
 					</fieldset>
 				</form>
 			</div>

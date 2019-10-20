@@ -4,15 +4,15 @@ import Grid from "./Board/Grid";
 import pDataStructure from "../utils/playerData";
 import { getNasaAPOD, urltoBGStyle } from "../utils/getNasaPic.js";
 import PlayerInfo from "./Board/Players";
+import GridController from "./Board/GridController";
 
 const playerIds = [1, 2];
 
-const Board = ({ apod, setApod }) => {
-	const [rows] = React.useState(6);
-	const [columns] = React.useState(7);
-	const [board, setBoard] = React.useState();
-
+const Board = ({ readyToStartGame, setReadyToStartGame, apod, setApod }) => {
 	const [players, setPlayers] = React.useState();
+	const [playersTurn, setPlayersTurn] = React.useState(0);
+	const [startGame, setStartGame] = React.useState(false);
+	const [winnerId, setWinnerId] = React.useState(0);
 
 	React.useEffect(() => {
 		getNasaAPOD().then((data) => {
@@ -26,7 +26,14 @@ const Board = ({ apod, setApod }) => {
 		setPlayers(tempPlayers);
 	}, [setApod]);
 
-	const { infoStyle, boardStyle } = Style;
+	React.useEffect(() => {
+		if (players)
+			setReadyToStartGame(
+				players.p1.confirmed && players.p2.confirmed ? true : false
+			);
+	});
+
+	const { infoStyle, flex5, boardStyle } = Style;
 	let boardApodStyle = { ...boardStyle, ...apod };
 
 	const mapIdsToPlayerPanel = playerIds.map((pId, i) => (
@@ -36,18 +43,34 @@ const Board = ({ apod, setApod }) => {
 			pId={pId}
 			players={players}
 			setPlayers={setPlayers}
+			myTurn={
+				playersTurn === 0
+					? undefined
+					: pId === playersTurn
+					? true
+					: false
+			}
+			setStartGame={setStartGame}
+			winnerId={winnerId}
+			setWinnerId={setWinnerId}
 		/>
 	));
 
 	const boardComponents = (
 		<div style={boardApodStyle}>
 			<div style={infoStyle}>{mapIdsToPlayerPanel}</div>
-			<Grid
-				rows={rows}
-				columns={columns}
-				board={board}
-				setBoard={setBoard}
-			/>
+			<div style={flex5}>
+				<GridController
+					readyToStartGame={readyToStartGame}
+					startGame={startGame}
+					setStartGame={setStartGame}
+					players={players}
+					setPlayers={setPlayers}
+					playersTurn={playersTurn}
+					setPlayersTurn={setPlayersTurn}
+					setWinnerId={setWinnerId}
+				/>
+			</div>
 		</div>
 	);
 

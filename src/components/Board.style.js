@@ -1,7 +1,13 @@
 const style = {
 	infoStyle: {
 		display: "flex",
-		flex: 1
+		flex: 1,
+		backgroundColor: "white",
+		border: "3px solid"
+	},
+
+	flex5: {
+		flex: 5
 	},
 	boardStyle: {
 		display: "flex",
